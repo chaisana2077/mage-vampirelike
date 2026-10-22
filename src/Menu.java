@@ -10,8 +10,7 @@ public class Menu extends JFrame {
 
 
     public BufferedImage wp, buttonStart, buttonGetout, buttonSettings;
-    int width = getWidth();
-    int height = getHeight();
+
 
     int buttonStartWidth = 200;
     int buttonStartHeight = 110;
