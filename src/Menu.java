@@ -24,19 +24,18 @@ public class Menu extends JFrame {
     MouseListener ml = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            int width = getWidth();
-            int height = getHeight();
-           if (e.getPoint().x > 0  && e.getPoint().x < 2000 && e.getPoint().y > 0 && e.getPoint().y < 300) {
+
+            if (e.getPoint().x > 860  && e.getPoint().x < 1060 && e.getPoint().y > 345 && e.getPoint().y < 455) {
 
                 new Main();
 
-           }
-            if (e.getPoint().x > 0  && e.getPoint().x < 2000 && e.getPoint().y > 300 && e.getPoint().y < 600) {
+            }
+            if (e.getPoint().x > 860  && e.getPoint().x < 1060 && e.getPoint().y > 485 && e.getPoint().y < 595) {
 
                 System.out.println("start");
 
             }
-            if (e.getPoint().x > 0  && e.getPoint().x < 2000 && e.getPoint().y > 600 && e.getPoint().y < 900) {
+            if (e.getPoint().x > 860  && e.getPoint().x < 1060 && e.getPoint().y > 625 && e.getPoint().y < 735) {
 
                 System.exit(0);
 
@@ -77,7 +76,7 @@ public class Menu extends JFrame {
             throw new RuntimeException(e);
 
         }
-        setSize(800, 600);
+        setSize(1920, 1080);
         setVisible(true);
         addMouseListener(ml);
 
@@ -86,19 +85,17 @@ public class Menu extends JFrame {
     public void paint(Graphics g)
 
     {
-        int width = getWidth();
-        int height = getHeight();
         super.paint(g);
 
 
-        g.drawImage(wp, 0, 0, width,height, this);
+        g.drawImage(wp, 0, 0, 1920, 1080, this);
 
 
-        g.drawImage(buttonStart,(width / 2) - (buttonStartWidth / 2) , 200, buttonStartWidth, buttonStartHeight, this);
+        g.drawImage(buttonStart, 860, 345, buttonStartWidth, buttonStartHeight, this);
 
-        g.drawImage(buttonSettings,(width / 2) - (buttonStartWidth / 2) , 400, buttonSettingsWidth, buttonSettingsHeight, this);
+        g.drawImage(buttonSettings, 860, 485, buttonSettingsWidth, buttonSettingsHeight, this);
 
-        g.drawImage(buttonGetout,(width / 2) - (buttonStartWidth / 2) , 600, buttonGetOutWidth, buttonGetOutHeight, this);
+        g.drawImage(buttonGetout, 860, 625, buttonGetOutWidth, buttonGetOutHeight, this);
 
     }
     public static void main(String[] args)
