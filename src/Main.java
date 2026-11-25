@@ -2,8 +2,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter; // chitaet nazatia + class KeyListener
-import java.awt.event.KeyEvent; // reakcia na nazatia + class KeyEvent
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -11,6 +11,12 @@ public class Main extends JFrame{
     public BufferedImage wp;
     public BufferedImage pers;
     public BufferedImage rock;
+
+    boolean up = false;
+    boolean down = false;
+    boolean left = false;
+    boolean right = false;
+
 
     int step = 25;
     int persX = 50;
@@ -36,17 +42,38 @@ public class Main extends JFrame{
         catch (Exception e){
             throw new RuntimeException(e);
         }
+
+        JPanel panel = new JPanel() {
+            @Override
+             public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(wp, 0, 0, 1920, 1080, this);
+                g.drawImage(pers, persX, persY, persW, persH, this);
+                g.drawImage(rock, rockX, rockY, rockW, rockH, this);
+            }
+        };
+        add(panel);
+
+
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+
                 int newX = persX;
                 int newY = persY;
                 int k = e.getKeyCode();
 
-                if (k == KeyEvent.VK_W)  newY = newY - step;
-                if (k == KeyEvent.VK_S)  newY = newY + step;
-                if (k == KeyEvent.VK_A)  newX = newX - step;
-                if (k == KeyEvent.VK_D)  newX = newX + step;
+                if (k == KeyEvent.VK_W)  {up = true;}
+                if (k == KeyEvent.VK_S)  {down = true;}
+                if (k == KeyEvent.VK_D)  {right = true;}
+                if (k == KeyEvent.VK_A)  {left = true;}
+
+
+
+                if (up)  newY -= step;
+                if (down)  newY += step;
+                if (left)  newX -= step;
+                if (right)  newX += step;
 
                 boolean hit = false;
 
@@ -70,6 +97,14 @@ public class Main extends JFrame{
 
                 repaint();
             }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int k = e.getKeyCode();
+                if (k == KeyEvent.VK_W) up = false;
+                if (k == KeyEvent.VK_S) down = false;
+                if (k == KeyEvent.VK_A) left = false;
+                if (k == KeyEvent.VK_D) right = false;
+            }
         });
 
         setSize(1920, 1080);
@@ -78,14 +113,6 @@ public class Main extends JFrame{
         }
 
 
-    public void paint(Graphics g)
-    {
-        super.paint(g);
-
-        g.drawImage(wp, 0, 0, 1920,1080, this);
-        g.drawImage(pers, persX, persY, persW, persH, this);
-        g.drawImage(rock, rockX, rockY, rockW, rockH, this);
-    }
 
     public static void main(String[] args)
     {
