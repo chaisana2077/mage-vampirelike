@@ -19,18 +19,18 @@ public class Main extends JFrame {
     int step = 6;
     int persX = 50;
     int persY = 50;
-    int persW = 300;
-    int persH = 200;
+    int persW = 35;
+    int persH = 66;
 
     int rockX = 300;
     int rockY = 300;
-    int rockW = 200;
-    int rockH = 200;
+    int rockW = 441;
+    int rockH = 305;
 
     Main() {
         try {
             wp = ImageIO.read(new File("src/pictures/wpplay.jpg"));
-            pers = ImageIO.read(new File("src/pictures/ProtectS.png"));
+            pers = ImageIO.read(new File("src/pictures/Mage.png"));
             rock = ImageIO.read(new File("src/pictures/rock.png"));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -43,7 +43,10 @@ public class Main extends JFrame {
                 g.drawImage(wp, 0, 0, 1920, 1080, this);
                 g.drawImage(pers, persX, persY, persW, persH, this);
                 g.drawImage(rock, rockX, rockY, rockW, rockH, this);
-            }
+
+                g.setColor(Color.RED);
+                g.drawRect(persX, persY, persW, persH);
+                g.drawRect(rockX, rockY, rockW, rockH);}
         };
         add(panel);
 
@@ -79,18 +82,11 @@ public class Main extends JFrame {
 
                 boolean hit = false;
 
-                if (newX + 300 > 300 && newX < 500 && newY + 200 > 300 && newY < 500) {
+
+                if (newX + persW > rockX && newX < rockX + rockW && newY + persH > rockY && newY < rockY + rockH) {
                     hit = true;
                 }
-                if (newX < 500 && newX + 300 > 300 && newY + 200 > 300 && newY < 500) {
-                    hit = true;
-                }
-                if (newY + 200 > 300 && newY < 500 && newX + 300 > 300 && newX < 500) {
-                    hit = true;
-                }
-                if (newY < 500 && newY + 200 > 300 && newX + 300 > 300 && newX < 500) {
-                    hit = true;
-                }
+
 
                 if (!hit) {
                     persX = newX;
